@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { StyleSheet, View, Button, Text } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { IRootState } from "@/store";
-const API_KEY = "b773ac200640c6efff9109660ee91d87";
 
 export default function Index() {
   const [weather, setWeather] = useState({});
@@ -13,7 +12,7 @@ export default function Index() {
     const fetchWeather = () => {
       if (myCoordinates.latitude === 0) return;
       fetch(
-        `http://api.openweathermap.org/data/2.5/weather?lat=${myCoordinates?.latitude}&lon=${myCoordinates?.longitude}&APPID=${API_KEY} `
+        `http://api.openweathermap.org/data/2.5/weather?lat=${myCoordinates?.latitude}&lon=${myCoordinates?.longitude}&APPID=${process.env.EXPO_PUBLIC_OPEN_WEATHER_API_KEY}`
       )
         .then((res) => res.json())
         .then((json) => {
@@ -25,6 +24,8 @@ export default function Index() {
     fetchWeather();
   }, [myCoordinates]);
 
+  console.log(weather);
+  if (weather?.weather) return <></>;
   return (
     <View>
       <Text>Weather: {weather?.weather[0]?.main}</Text>

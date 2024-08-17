@@ -15,6 +15,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import Route from "@/components/Route";
 
+const GOOGLE_API_KEY: any = process.env.EXPO_PUBLIC_GOOGLE_API_KEY;
 export default function Index() {
   const dispatch = useDispatch();
   const myCoordinates = useSelector(
@@ -96,7 +97,7 @@ export default function Index() {
               ? myCoordinates
               : destinationCoordinates
           }
-          apikey="AIzaSyBSmC5jX6MxDsWl3nB1yAmXmJ0REJgscnE"
+          apikey={GOOGLE_API_KEY}
           strokeWidth={4}
           strokeColor="blue"
           onReady={(result) => {
